@@ -1,0 +1,80 @@
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+
+<dom-module id="login-form">
+  <style>
+    :host {
+      display: block;
+    }
+
+    .colorful {
+        background-color: #4285f4;
+        color: #fff;
+    }
+
+    .centered-button {
+        width:  100px;
+        margin: 0 auto;
+        padding-top: 1em;
+    }
+
+    .message {
+        margin-top: 0.5em;
+        color: #e81719;
+        font-size: 10px;
+        text-align: center;
+    }
+
+  </style>
+  <template>
+        <div class="message">
+            <label>[[loginMessage]]</label>
+        </div>
+          <form is="iron-form" id="form">
+              <paper-input id="username" label="Username"></paper-input>
+              <paper-input type="password" id="password" label="Password" ></paper-input>
+              <div class="centered-button">
+                <paper-button raised role="button" class="colorful" on-click="login"><iron-icon icon="check"></iron-icon>Login</paper-button>
+              </div>
+          </form>
+      </paper-material>
+  </template>
+
+  <script>
+    (function() {
+
+      "use strict";
+      Polymer({
+          is: 'login-form',
+
+          properties: {
+              loginMessage : String
+          },
+
+        login : function(){
+
+            var restapi = fermata.json(spbo.Config.apiroot);
+            restapi('backoffice')('login').post({
+                user : this.$.username.value,
+                password : this.$.password.value
+            }, function(error, result){
+                if(!error){
+                    window.localStorage.setItem(result);
+                    window.location.href = "index.html";
+                }
+                else{
+                    this.loginMessage = result;
+                }
+                console.log (JSON.stringify(result));
+            }.bind(this));
+
+        }
+      });
+    })();
+  </script>
+
+</dom-module>
+
