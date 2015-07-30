@@ -47,7 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- endbuild-->
 
     <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>>
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <!-- endbuild -->
 
     <!-- will be replaced with elements/elements.vulcanized.html -->
@@ -58,13 +58,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body class="fullbleed layout vertical">
 <span id="browser-sync-binding"></span>
-<template is="dom-bind" id="login">
-    <section class="login-container">
-        <paper-material class="login" elevation="1">
-            <div class="login-header">Sitepoints Backoffice</div>
-            <login-form></login-form>
-        </paper-material>
-    </section>
+<template is="dom-bind" id="app">
+    <iron-pages class="login-content" attr-for-selected="data-route" selected="{{route}}">
+        <section  data-route="login">
+            <paper-material class="login" elevation="1">
+                <div class="login-header">Sitepoints Backoffice</div>
+                <login-form></login-form>
+            </paper-material>
+        </section>
+
+        <section data-route="register">
+            <paper-material class="login" elevation="1">
+                <div class="login-header">Sitepoints Backoffice</div>
+                <h1>test</h1>
+            </paper-material>
+        </section>
+    </iron-pages>
 </template>
 
 <!-- build:js scripts/app.js -->

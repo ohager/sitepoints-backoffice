@@ -3,7 +3,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
 
-<dom-module id="login-form">
+<dom-module id="register-form">
     <style>
         :host {
             display: block;
@@ -47,6 +47,7 @@
                 </paper-button>
             </div>
         </form>
+        </paper-material>
     </template>
 
     <script>
@@ -54,7 +55,7 @@
 
             "use strict";
             Polymer({
-                is: 'login-form',
+                is: 'register-form',
 
                 properties: {
                     loginMessage: String
@@ -80,7 +81,7 @@
                 },
 
                 register : function(){
-                    page('/register');
+                    console.warn("Implement me!");
                 }
             });
         })();
