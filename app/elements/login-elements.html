@@ -8,6 +8,9 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<!-- Additional dependencies -->
+<script src="../bower_components/page/page.js"></script>
+
 <!-- Iron elements -->
 <link rel="import" href="../bower_components/iron-flex-layout/classes/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
@@ -26,10 +29,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
 
 <!-- Configure your routes here -->
-<link rel="import" href="login-routing.html">
 
 
 <!-- Add your elements here -->
 <link rel="import" href="../styles/app-theme.html">
+
 <link rel="import" href="login/login-form.html">
 <link rel="import" href="login/register-form.html">
+<link rel="import" href="login/stores/login-store.html">
+<link rel="import" href="login/dispatcher/login-dispatcher.html">
+
+

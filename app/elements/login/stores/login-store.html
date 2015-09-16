@@ -1,0 +1,18 @@
+<script>
+    (function(){
+        "use strict";
+        NanoFlux.createStore('loginStore', {
+            onLogin : function(credentials){
+                var user = {
+                    userName : "Fake"
+                };
+                this.notify(user);
+            },
+
+            onLogout : function(){
+                console.log("Logout...");
+                this.notify();
+            }
+        });
+    })()
+</script>

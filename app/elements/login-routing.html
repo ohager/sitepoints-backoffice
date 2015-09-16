@@ -10,20 +10,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <script src="../../bower_components/page/page.js"></script>
 <script>
-  window.addEventListener('WebComponentsReady', function() {
-      
-    page('/', function () {
-      app.route = 'login';
-    });
-      
-    page('/register', function () {
-      app.route = 'register';
-    });
+    (function(document) {
+        'use strict';
 
-    // add #! before urls
-    page({
-      hashbang: true
-    });
+        var app = document.querySelector('#app');
 
-  });
+        window.addEventListener('WebComponentsReady', function () {
+
+            page('/', function () {
+                app.route = 'login';
+            });
+
+            page('/register', function () {
+                app.route = 'register';
+            });
+
+            // add #! before urls
+            page({
+                hashbang: true
+            });
+
+        });
+    })(document);
 </script>
