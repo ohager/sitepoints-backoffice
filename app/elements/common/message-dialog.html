@@ -1,43 +1,52 @@
-<link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
-<link rel="import" href="/bower_components/neon-animation/animations/fade-in-animation.html">
-<link rel="import" href="/bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
 
 <dom-module id="message-dialog">
-  <style>
-    paper-dialog {
-      min-height: 200px;
-      width: 300px;
-      background-color: white;
-    }
-  </style>
-  <template>
-    <paper-dialog id="dialog" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
-      <h2>[[title]]</h2>
-      <p>[[message]]</p>
-    </paper-dialog>
-  </template>
-  <script>
-    (function(){
-      Polymer({
-        is: "message-dialog",
-
-        publish : {
-          title : String,
-          message : String
-        },
-
-        open:function(){
-          var dialog = this.$.dialog;
-          dialog.open();
-        },
-
-        close:function(){
-          var dialog = this.$.dialog;
-          dialog.close();
+    <style>
+        paper-dialog {
+            min-height: 200px;
+            width: 300px;
+            background-color: white;
         }
-      });
+    </style>
+    <template>
+        <paper-dialog id="dialog" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+            <h2>[[title]]</h2>
 
-    })();
-  </script>
+            <p>[[message]]</p>
+
+            <div class="buttons">
+                <paper-button dialog-dismiss hidden="{{!cancelText.length}}">[[cancelText]]</paper-button>
+                <paper-button dialog-confirm autofocus hidden="{{!confirmText.length}}">[[confirmText]]</paper-button>
+            </div>
+        </paper-dialog>
+    </template>
+
+    <script>
+        (function () {
+            Polymer({
+                is: "message-dialog",
+
+                publish: {
+                    title: String,
+                    message: String,
+                    cancelText: String,
+                    confirmText: String
+                },
+
+                open: function () {
+                    var dialog = this.$.dialog;
+                    dialog.open();
+                },
+
+                close: function () {
+                    var dialog = this.$.dialog;
+                    dialog.close();
+                }
+            });
+
+        })();
+    </script>
 </dom-module>
 

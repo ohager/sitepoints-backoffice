@@ -1,6 +1,8 @@
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../common/message-dialog.html">
+
 
 <dom-module id="register-form">
     <style>
@@ -14,7 +16,7 @@
         }
 
         #form {
-            width : 36em;
+            width: 36em;
         }
 
         .message {
@@ -27,13 +29,18 @@
     </style>
     <template>
         <form is="iron-form" id="form">
-            <paper-input id="username" value={{user.user}} pattern="{{pattern.username}}" auto-validate="true" error-message="Invalid Username" label="User Name"></paper-input>
+            <paper-input id="username" value={{user.user}} pattern="{{pattern.username}}" auto-validate="true"
+                         error-message="Invalid Username" label="User Name"></paper-input>
             <paper-input id="domain" value={{user.domain}} label="Domain"></paper-input>
             <paper-input id="firstname" value={{user.firstName}} label="First Name"></paper-input>
             <paper-input id="lastname" value={{user.lastName}} label="Last Name"></paper-input>
-            <paper-input type="text" value={{user.email}} value={{email}} auto-validate="true" pattern="{{pattern.email}}"  error-message="Invalid E-Mail" id="email" label="E-Mail"></paper-input>
-            <paper-input type="password" value={{user.password}} pattern="{{pattern.password}}" auto-validate="true" error-message="Password too weak" id="password" label="Password"></paper-input>
-            <paper-input id="confirmPassword" on-input="verifyPassword" type="password" id="confirmPassword" pattern="{{pattern.confirmPassword}}" error-message="Passwords do not match" label="Password Confirmation"></paper-input>
+            <paper-input type="text" value={{user.email}} auto-validate="true" pattern="{{pattern.email}}"
+                         error-message="Invalid E-Mail" id="email" label="E-Mail"></paper-input>
+            <paper-input type="password" value={{user.password}} pattern="{{pattern.password}}" auto-validate="true"
+                         error-message="Password too weak" id="password" label="Password"></paper-input>
+            <paper-input id="confirmPassword" value="{{confirmPassword}}" on-input="verifyPassword" type="password"
+                         pattern="{{pattern.confirmPassword}}" error-message="Passwords do not match"
+                         label="Password Confirmation"></paper-input>
             <div class="centered-button-box">
                 <paper-button raised role="button" on-click="goback">
                     <iron-icon icon="arrow-back"></iron-icon>
@@ -46,42 +53,84 @@
             </div>
         </form>
         </paper-material>
+        <message-dialog id="dialog" title="[[dialog.title]]" message="[[dialog.message]]"
+                        cancel-text="[[dialog.cancelText]]" confirm-text="[[dialog.confirmText]]"></message-dialog>
     </template>
 
     <script>
         (function () {
-                        "use strict";
+            "use strict";
             Polymer({
                 is: 'register-form',
 
                 properties: {
-                    user : {
-                        type : Object,
-                        notify : true
+                    user: {
+                        type: Object,
+                        notify: true,
+                        value: {}
                     },
-                    pattern : Object
+                    dialog: {
+                        type: Object,
+                        value: {}
+                    },
+                    pattern: Object,
+                    registerMessage: String
                 },
 
-                attached : function(){
-                    this.user = {};
+                listeners: {
+                    'iron-overlay-closed': 'onDialogClosed'
+                },
+
+                attached: function () {
                     this.pattern = {
-                        email : "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}",
-                        username : "[a-zA-Z0-9._-]{6,16}",
-                        password : ".{6}.*"
+                        email: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}",
+                        username: "[a-zA-Z0-9._-]{6,16}",
+                        password: ".{6}.*"
                     };
                 },
 
-                verifyPassword : function(e){
+                verifyPassword: function (e) {
                     this.$.confirmPassword.invalid = e.target.value !== this.user.password;
                 },
 
-                goback : function(){
+                onDialogClosed: function (e) {
+                    if (e.target.closingReason.confirmed) {
+                        this.goback();
+                    }
+                },
+
+                goback: function () {
+                    this.reset();
                     page('/login');
                 },
 
-                register : function(){
+                reset: function () {
+                    this.user = {};
+                    this.confirmPassword = undefined;
+                },
 
-                    console.warn(this.email);
+                register: function () {
+                    var restapi = fermata.json(window.global.config.apiroot);
+                    restapi('account').post(this.user, function (error, result) {
+                        if (!error) {
+                            this.dialog = {
+                                    title : "Yeah!",
+                                    message: this.user.user + " registered successfully.",
+                                    confirmText: "Go To Login",
+                                    cancelText: ""
+                                    };
+                            this.reset();
+                        }
+                        else {
+                            this.dialog = {
+                                    title : "Damn! Something went wrong.",
+                                    message:  error.message,
+                                    confirmText: "",
+                                    cancelText: "Try Again"
+                                    };
+                        }
+                        this.$.dialog.open();
+                    }.bind(this));
                 }
             });
         })();

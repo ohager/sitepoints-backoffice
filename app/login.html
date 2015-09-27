@@ -52,6 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- build:js scripts/lib.js -->
     <script src="lib/fermata.js"></script>
+    <script src="lib/fermata.statuscheck.plugin.js"></script>
     <script src="lib/rsvp-latest.min.js"></script>
     <script src="lib/nanoflux.js"></script>
     <!-- endbuild-->
@@ -65,7 +66,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body class="fullbleed layout vertical">
 <span id="browser-sync-binding"></span>
 <template is="dom-bind" id="app">
+
+
+
     <iron-pages class="login-content" attr-for-selected="data-route" selected="{{route}}">
+
         <section  data-route="login">
             <paper-material class="login" elevation="1">
                 <div class="login-header">Access Sitepoints Backoffice</div>

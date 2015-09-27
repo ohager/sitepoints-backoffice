@@ -3,8 +3,6 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
 
-<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
-
 
 <dom-module id="login-form">
     <style>
@@ -65,7 +63,7 @@
 
                 login: function () {
 
-                    var restapi = fermata.json(spbo.Config.apiroot);
+                    var restapi = fermata.json(window.global.config.apiroot);
                     restapi('backoffice')('login').post({
                         user: this.$.username.value,
                         password: this.$.password.value
@@ -77,7 +75,6 @@
                         else {
                             this.loginMessage = result;
                         }
-                        console.log(JSON.stringify(result));
                     }.bind(this));
 
                 },
