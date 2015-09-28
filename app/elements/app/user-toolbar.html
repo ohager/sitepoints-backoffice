@@ -1,0 +1,41 @@
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+
+<dom-module id="user-toolbar">
+    <style>
+        :host {
+            display: inline-block;
+        }
+    </style>
+    <template>
+        <span>[[greeting]]</span>
+        <paper-icon-button icon="eject" title="Logout" on-click="logout"></paper-icon-button>
+    </template>
+
+    <script>
+        (function () {
+
+            "use strict";
+            Polymer({
+                is: 'user-toolbar',
+
+                properties: {
+                    greeting : String
+                },
+
+                attached : function(){
+                  var user = JSON.parse(window.localStorage.getItem('user'));
+                  this.greeting = "Hi, " + user.firstName;
+                },
+
+                logout : function(){
+                    window.localStorage.removeItem('user');
+                    window.location = "./login.html";
+                }
+
+            });
+        })();
+    </script>
+
+</dom-module>
+

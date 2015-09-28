@@ -4,12 +4,10 @@
 
     window.addEventListener('WebComponentsReady', function () {
 
-
         page('/home', function () {
             app.route = 'home';
         });
 
-        // add #! before urls
         page({
             hashbang: true
         });
