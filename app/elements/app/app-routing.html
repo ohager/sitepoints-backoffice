@@ -1,0 +1,24 @@
+
+<script src="../../bower_components/page/page.js"></script>
+<script>
+    window.addEventListener('WebComponentsReady', function() {
+
+        page('/home', function () {
+            app.route = 'home';
+            app.subtitle = "Home";
+        });
+
+        page('/account', function () {
+            app.route = 'account';
+            app.subtitle = "Accounts"
+        });
+
+        // add #! before urls
+        page({
+            hashbang: true
+        });
+
+        page('/home');
+
+    });
+</script>

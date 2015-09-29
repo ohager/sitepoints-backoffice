@@ -4,10 +4,14 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.1.0",
     "page": "visionmedia/page.js#~1.6.3",
-    "paper-tooltip": "PolymerElements/paper-tooltip#~1.1.0"
+    "paper-tooltip": "PolymerElements/paper-tooltip#~1.1.0",
+    "paper-card": "PolymerElements/paper-card#~1.0.5"
   },
   "devDependencies": {
     "web-component-tester": "*",
     "test-fixture": "PolymerElements/test-fixture#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^1.1.0"
   }
 }

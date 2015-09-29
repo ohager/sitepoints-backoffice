@@ -77,12 +77,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- Drawer Content -->
             <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
-                <a data-route="home" href="">
+                <a data-route="home" href="/home">
                     <iron-icon icon="home"></iron-icon>
                     <span>Home</span>
                 </a>
+
+                <a data-route="account" href="/account">
+                    <iron-icon icon="account-box"></iron-icon>
+                    <span>Account</span>
+                </a>
             </paper-menu>
         </div>
+
         <paper-header-panel main mode="waterfall-tall">
 
             <paper-toolbar id="mainToolbar">
@@ -97,7 +103,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <div class="middle paper-font-display2 app-name">Sitepoints Back Office</div>
 
                 <!-- Application sub title -->
-                <div class="bottom title"></div>
+                <div class="bottom title">{{subtitle}}</div>
 
             </paper-toolbar>
 
@@ -109,6 +115,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                     <section data-route="home">
                         <home-canvas></home-canvas>
+                    </section>
+
+                    <section data-route="account">
+                        <account-canvas></account-canvas>
                     </section>
 
                 </iron-pages>
