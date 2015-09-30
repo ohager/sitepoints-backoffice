@@ -1,16 +1,22 @@
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
-
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-fit-behavior/iron-fit-behavior.html">
+<link rel="import" href="account-item.html">
+<link rel="import" href="domain-list.html">
 
 <dom-module id="account-canvas">
     <style>
         :host {
             display: block;
+
         }
 
         #cards {
-        @apply(--layout-vertical);
-        @apply(--center-justified);
+        @apply(- -layout-vertical);
+        @apply(- -center-justified);
             max-width: 640px;
             margin-left: auto;
             margin-right: auto;
@@ -19,6 +25,37 @@
         paper-card {
             width: 100%;
             margin-bottom: 16px;
+        }
+
+        .list {
+            padding-top: 12px;
+            background-color: white;
+            display: inline-block;
+            width: 240px;
+            height: 228px;
+            margin: 12px;
+        @apply(- -shadow-elevation-2dp);
+        }
+
+        .short {
+            padding-top: 12px;
+            height: 216px;
+        }
+
+        .lime {
+            --account-item-avatar-color: #CDDC39;
+        }
+
+        .brown {
+            --account-item-avatar-color: #795548;
+        }
+
+        .amber {
+            --account-item-avatar-color: #FFC107;
+        }
+
+        small {
+            color: grey;
         }
 
     </style>
@@ -32,9 +69,19 @@
 
             <paper-card heading="Account Information">
                 <div class="card-content">
-                    <em>[[account.firstName]]</em>
-                    <em>[[account.lastName]]</em>
-                    <em>[[account.user]]</em>
+                    <div role="list">
+                        <account-item label="User Name" class="amber" value="[[account.user]]"></account-item>
+                        <account-item label="First Name" class="brown" value="{{account.firstName}}" editable></account-item>
+                        <account-item label="Last Name" class="lime" value="{{account.lastName}}" editable></account-item>
+                    </div>
+                </div>
+            </paper-card>
+
+            <paper-card heading="Your Domains">
+                <div class="card-content">
+                    <div role="list">
+                        <domain-list domains="{{account.domains}}"></domain-list>
+                    </div>
                 </div>
             </paper-card>
         </div>
@@ -48,16 +95,33 @@
                 is: 'account-canvas',
 
                 properties: {
-                    account : Object
+                    account: {
+                        type: Object,
+                        notify: true,
+                        value: {}
+                    },
+                    editorStateLastName: {
+                        type: Boolean,
+                        value: false
+                    }
                 },
 
-                attached : function(){
+                edit: function (event) {
+                    var id = event.target.domHost.id;
+
+                    this.editorStateLastName = true;
+                },
+
+                attached: function () {
                     var user = JSON.parse(window.localStorage.getItem('user'));
                     var restapi = fermata.json(window.global.config.apiroot);
                     restapi('account')(user.user).get(function (error, result) {
                         this.account = result;
+                        // TODO: multiple domains in backend
+                        this.set('account.domains', [this.account.domain]);
                     }.bind(this));
-                }
+                },
+
 
             });
         })();
