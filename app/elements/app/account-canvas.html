@@ -11,7 +11,9 @@
     <template>
         <paper-material elevation="1">
 
-            <paper-card></paper-card>
+            <paper-card heading="API Key">
+                <code>[[apiKey]]</code>
+            </paper-card>
 
         </paper-material>
     </template>
@@ -23,7 +25,17 @@
             Polymer({
                 is: 'account-canvas',
 
-                properties: {}
+                properties: {
+                    apiKey : String
+                },
+
+                attached : function(){
+                    var user = JSON.parse(window.localStorage.getItem('user'));
+                    var restapi = fermata.json(window.global.config.apiroot);
+                    restapi('account')(user.user).get(function (error, result) {
+                        this.apiKey = result.apikey;
+                    }.bind(this));
+                }
 
             });
         })();

@@ -63,17 +63,19 @@
 
                 login: function () {
 
-                    var restapi = fermata.json(window.global.config.apiroot);
-                    restapi('backoffice')('login').post({
+                    var restapi = fermata.raw({base: window.global.config.apiroot});
+                    restapi('backoffice')('login').post( { 'Content-Type' :'application/json'}, JSON.stringify({
                         user: this.$.username.value,
                         password: this.$.password.value
-                    }, function (error, result) {
-                        if (!error) {
-                            window.localStorage.setItem('user',JSON.stringify(result));
+                    }), function (error, result) {
+                        var data = result.data;
+                        if (result.status === 200) {
+                            window.localStorage.setItem('user',data);
+                            window.localStorage.setItem('auth', result.headers['X-Authorization']);
                             window.location.href = "index.html";
                         }
                         else {
-                            this.loginMessage = result;
+                            this.loginMessage = data;
                         }
                     }.bind(this));
 
