@@ -7,15 +7,37 @@
         :host {
             display: block;
         }
+
+        #cards {
+        @apply(--layout-vertical);
+        @apply(--center-justified);
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        paper-card {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
     </style>
     <template>
-        <paper-material elevation="1">
-
+        <div id="cards">
             <paper-card heading="API Key">
-                <code>[[apiKey]]</code>
+                <div class="card-content">
+                    <code>[[account.apikey]]</code>
+                </div>
             </paper-card>
 
-        </paper-material>
+            <paper-card heading="Account Information">
+                <div class="card-content">
+                    <em>[[account.firstName]]</em>
+                    <em>[[account.lastName]]</em>
+                    <em>[[account.user]]</em>
+                </div>
+            </paper-card>
+        </div>
     </template>
 
     <script>
@@ -26,14 +48,14 @@
                 is: 'account-canvas',
 
                 properties: {
-                    apiKey : String
+                    account : Object
                 },
 
                 attached : function(){
                     var user = JSON.parse(window.localStorage.getItem('user'));
                     var restapi = fermata.json(window.global.config.apiroot);
                     restapi('account')(user.user).get(function (error, result) {
-                        this.apiKey = result.apikey;
+                        this.account = result;
                     }.bind(this));
                 }
 
