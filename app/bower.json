@@ -6,7 +6,8 @@
     "page": "visionmedia/page.js#~1.6.3",
     "paper-tooltip": "PolymerElements/paper-tooltip#~1.1.0",
     "paper-card": "PolymerElements/paper-card#~1.0.5",
-    "paper-item": "PolymerElements/paper-item#~1.0.3"
+    "paper-item": "PolymerElements/paper-item#~1.0.3",
+    "lodash": "~3.10.1"
   },
   "devDependencies": {
     "web-component-tester": "*",

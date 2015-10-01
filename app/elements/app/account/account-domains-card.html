@@ -1,0 +1,100 @@
+<link rel="import" href="../../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="account-domain-list.html">
+
+<dom-module id="account-domains-card">
+    <style>
+        :host {
+            display: block;
+        }
+
+        paper-card {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .action-content {
+            text-align: center;
+            padding: 16px;
+            cursor: pointer;
+        }
+
+    </style>
+    <template>
+        <paper-card heading="Your Domains">
+            <div class="card-content">
+                <div role="list">
+                    <account-domain-list></account-domain-list>
+                </div>
+            </div>
+            <div class="card-actions">
+                <div class="action-content" on-click="toggle">
+                    <iron-icon icon="add"></iron-icon>Add Domain
+                    <paper-ripple></paper-ripple>
+                </div>
+                <iron-collapse id="collapse">
+                    <paper-input id="domainInput" label="Domain Name" value="{{_newDomain}}" on-input="verifyDomain" auto-validate="true" error-message="Domain must not be empty">
+                        <paper-icon-button suffix on-click="confirmNewDomain"
+                                           icon="done" alt="done" title="Confirm Domain" tabindex="0">
+                        </paper-icon-button>
+                        <paper-icon-button suffix on-click="toggle"
+                                           icon="clear" alt="clear" title="clear" tabindex="0">
+                        </paper-icon-button>
+                    </paper-input>
+                </iron-collapse>
+            </div>
+        </paper-card>
+    </template>
+
+    <script>
+        (function () {
+
+            "use strict";
+            Polymer({
+                is: 'account-domains-card',
+
+                properties: {
+                    domainList : Array,
+                    _newDomain : String,
+                    _pattern : {
+                        type : Object,
+                        value : {
+                            domain : "^\w.+"
+                        }
+                    }
+                },
+
+                dispatcher : NanoFlux.getDispatcher('accountDispatcher'),
+
+                ready : function(){
+                  //  NanoFlux.getStore('accountStore').subscribe(this, this.accountChanged);
+                },
+
+                toggle: function() {
+                    this._newDomain = "";
+                    this.$.collapse.toggle();
+                },
+
+                verifyDomain : function(e){
+                    this.$.domainInput.invalid = !this._newDomain.length;
+                },
+
+                confirmNewDomain : function() {
+                    if(!this._newDomain.length ) return;
+
+                    this.dispatcher.addDomain(this._newDomain);
+                    this.toggle();
+
+                },
+
+            });
+        })();
+    </script>
+
+</dom-module>
+

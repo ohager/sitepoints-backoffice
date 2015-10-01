@@ -1,0 +1,61 @@
+<link rel="import" href="../../../bower_components/paper-item/paper-icon-item.html">
+
+<dom-module id="account-domain-list">
+    <style>
+        :host {
+            display: block;
+        }
+
+        .clear {
+            color: darkred;
+        }
+
+
+    </style>
+    <template>
+
+        <template id="domainList" is="dom-repeat" items="{{domains}}" observe="domains">
+            <paper-icon-item>
+                <paper-item-body class="flex">
+                    <div class="label">{{item}}</div>
+                </paper-item-body>
+                <paper-icon-button data-ix={{index}} class="clear" icon="clear" on-click="remove"></paper-icon-button>
+            </paper-icon-item>
+        </template>
+
+    </template>
+
+    <script>
+        (function () {
+
+            "use strict";
+            Polymer({
+                is: 'account-domain-list',
+
+                properties: {
+                    domains: {
+                        type : Array,
+                        verify : true
+                    }
+                },
+
+                dispatcher : NanoFlux.getDispatcher('accountDispatcher'),
+
+                accountChanged : function(account){
+                    this.set('domains', account.domains.slice() ); // need a copy
+                },
+
+                ready : function(){
+                    NanoFlux.getStore('accountStore').subscribe(this, this.accountChanged);
+                },
+
+                remove: function (event) {
+                    this.dispatcher.removeDomain( this.domains[event.model.index] );
+                }
+
+            });
+        })();
+    </script>
+
+</dom-module>
+

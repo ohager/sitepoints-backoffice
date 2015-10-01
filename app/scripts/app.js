@@ -35,4 +35,7 @@
         }
     };
 
+    // Flux Setup
+    NanoFlux.getDispatcher('accountDispatcher').connectTo(NanoFlux.getStore('accountStore'));
+
 })(document);
