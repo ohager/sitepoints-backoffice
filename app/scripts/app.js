@@ -36,6 +36,9 @@
     };
 
     // Flux Setup
-    NanoFlux.getDispatcher('accountDispatcher').connectTo(NanoFlux.getStore('accountStore'));
+    var dispatcher = NanoFlux.createDispatcher('accountDispatcher');
+    dispatcher.connectTo(NanoFlux.getStore('accountStore'));
+    NanoFlux.accountActions = new AccountActionProvider(dispatcher);
+
 
 })(document);

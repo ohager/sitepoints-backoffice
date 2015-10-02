@@ -69,12 +69,6 @@
                     }
                 },
 
-                dispatcher : NanoFlux.getDispatcher('accountDispatcher'),
-
-                ready : function(){
-                  //  NanoFlux.getStore('accountStore').subscribe(this, this.accountChanged);
-                },
-
                 toggle: function() {
                     this._newDomain = "";
                     this.$.collapse.toggle();
@@ -87,10 +81,10 @@
                 confirmNewDomain : function() {
                     if(!this._newDomain.length ) return;
 
-                    this.dispatcher.addDomain(this._newDomain);
+                    NanoFlux.accountActions.addDomain(this._newDomain);
                     this.toggle();
 
-                },
+                }
 
             });
         })();

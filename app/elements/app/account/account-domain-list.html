@@ -39,8 +39,6 @@
                     }
                 },
 
-                dispatcher : NanoFlux.getDispatcher('accountDispatcher'),
-
                 accountChanged : function(account){
                     this.set('domains', account.domains.slice() ); // need a copy
                 },
@@ -50,7 +48,7 @@
                 },
 
                 remove: function (event) {
-                    this.dispatcher.removeDomain( this.domains[event.model.index] );
+                    NanoFlux.accountActions.removeDomain( this.domains[event.model.index] );
                 }
 
             });

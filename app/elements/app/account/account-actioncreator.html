@@ -1,0 +1,50 @@
+<script>
+
+    function AccountActionProvider(dispatcher) {
+        "use strict";
+        var restapi = fermata.json(window.global.config.apiroot);
+
+        this.load = function () {
+            return new Promise(function (resolve, reject) {
+                var user = JSON.parse(window.localStorage.getItem('user'));
+                restapi('account')(user.user).get(function (error, account) {
+                    if (error) {
+                        reject(error);
+                        return;
+                    }
+
+                    if (!account.domains) {
+                        account.domains = [];
+                    }
+                    dispatcher.dispatch('load', account);
+                    resolve(account);
+                });
+            });
+        };
+
+        this.save = function (account) {
+
+            return new Promise(function (resolve, reject) {
+                var user = JSON.parse(window.localStorage.getItem('user'));
+                restapi('account')(user.user).put(account, function (error, result) {
+                    if (error) {
+                        reject(error);
+                    }
+                    else {
+                        resolve();
+                    }
+                });
+            });
+
+        };
+
+        this.addDomain = function (domainName) {
+            dispatcher.dispatch('addDomain', domainName);
+        };
+
+        this.removeDomain = function (domainName) {
+            dispatcher.dispatch('removeDomain', domainName);
+        };
+    }
+    ;
+</script>

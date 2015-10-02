@@ -3,11 +3,11 @@
         "use strict";
         NanoFlux.createStore('accountStore', {
             _account: {},
+
             onAddDomain: function (domainName) {
                 if (this._account.domains && this._account.domains.indexOf(domainName) === -1) {
-
                     this._account.domains.push(domainName);
-                    this.notify(this._account);
+                    this.propagateChanges();
                 }
             },
             onRemoveDomain: function (domainName) {
@@ -15,23 +15,19 @@
                     var dix = this._account.domains.indexOf(domainName);
                     if(dix!==-1){
                         this._account.domains.splice(dix, 1);
-                        this.notify(this._account);
+                        this.propagateChanges();
                     }
                 }
             },
 
-            onLoad: function () {
-                var user = JSON.parse(window.localStorage.getItem('user'));
-                var restapi = fermata.json(window.global.config.apiroot);
-                restapi('account')(user.user).get(function (error, result) {
-                    this._account = result;
-                    // TODO: multiple domains in backend
-                    this._account.domains = [];
-                    this._account.domains.push(result.domain);
-                    this.notify(this._account);
-                }.bind(this));
-            }
+            onLoad: function (account) {
+                this._account = account;
+                this.propagateChanges();
+            },
 
+            propagateChanges :  function(){
+                this.notify(this._account);
+            }
 
         });
     })()
