@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 
 <dom-module id="home-canvas">
@@ -6,11 +6,13 @@
         :host {
             display: block;
         }
+        #toast {
+            position : absolute;
+        }
     </style>
     <template>
-        <paper-material elevation="1">
-            <h2>Home</h2>
-        </paper-material>
+        <h1>Home</h1>
+        <paper-button on-click="click">Click Me</paper-button>
     </template>
 
     <script>
@@ -20,7 +22,12 @@
             Polymer({
                 is: 'home-canvas',
 
-                properties: {}
+                properties: {
+                },
+
+                click : function(e){
+                    this.fire('show-message', "This is the message");
+                }
 
             });
         })();

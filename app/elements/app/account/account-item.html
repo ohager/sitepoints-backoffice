@@ -75,7 +75,8 @@
                     label : String,
                     value : {
                         type : String,
-                        notify : true
+                        notify : true,
+                        observer : '_valueChanged'
                     },
                     editable : {
                         type : Boolean,
@@ -104,6 +105,12 @@
                     if(this.editable){
                         this.$.editButton.removeAttribute('hidden');
                         this.$.saveButton.setAttribute('hidden', null);
+                    }
+                },
+
+                _valueChanged : function(){
+                    if(this.value.length){
+                        this._avatarChar = this.value[0].toUpperCase();
                     }
                 }
 

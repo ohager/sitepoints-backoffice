@@ -62,17 +62,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 
 <body class="fullbleed layout vertical">
+
 <span id="browser-sync-binding"></span>
+
 <template is="dom-bind" id="app">
 
-
+    <paper-toast id="toast" text="{{message}}"></paper-toast>
 
     <iron-pages class="login-content" attr-for-selected="data-route" selected="{{route}}">
 
-        <section  data-route="login">
+        <section data-route="login">
             <paper-material class="login" elevation="1">
                 <div class="login-header">Access Sitepoints Backoffice</div>
-                <login-form></login-form>
+                <login-form user="{{user}}"></login-form>
             </paper-material>
         </section>
 
@@ -82,8 +84,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <register-form></register-form>
             </paper-material>
         </section>
+
     </iron-pages>
 </template>
+
+
 
 <!-- build:js scripts/app.js -->
 <script src="config.js"></script>

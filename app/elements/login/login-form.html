@@ -35,7 +35,7 @@
             <label>[[loginMessage]]</label>
         </div>
         <form is="iron-form" id="form">
-            <paper-input id="username" label="Username"></paper-input>
+            <paper-input id="username" label="Username" value="{{user}}"></paper-input>
             <paper-input type="password" id="password" label="Password"></paper-input>
             <div class="centered-button-box">
                 <paper-button raised role="button" on-click="register">
@@ -58,7 +58,8 @@
                 is: 'login-form',
 
                 properties: {
-                    loginMessage: String
+                    loginMessage: String,
+                    user : String
                 },
 
                 login: function () {

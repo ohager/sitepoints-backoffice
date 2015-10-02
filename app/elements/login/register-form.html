@@ -52,8 +52,12 @@
             </div>
         </form>
         </paper-material>
+
+        <paper-toast id="toast" text="[[toastMessage]]"></paper-toast>
+        <!--
         <message-dialog id="dialog" title="[[dialog.title]]" message="[[dialog.message]]"
                         cancel-text="[[dialog.cancelText]]" confirm-text="[[dialog.confirmText]]"></message-dialog>
+                        -->
     </template>
 
     <script>
@@ -63,6 +67,7 @@
                 is: 'register-form',
 
                 properties: {
+                    toastMessage : String,
                     user: {
                         type: Object,
                         notify: true,
@@ -115,24 +120,18 @@
                 register: function () {
                     var restapi = fermata.json(window.global.config.apiroot);
                     restapi('account').post(this.user, function (error, result) {
+                        var registerMessage = {
+                            user: "",
+                            message: "Damn! Something went wrong."
+                        };
+
                         if (!error) {
-                            this.dialog = {
-                                    title : "Yeah!",
-                                    message: this.user.user + " registered successfully.",
-                                    confirmText: "Go To Login",
-                                    cancelText: ""
-                                    };
-                            this.reset();
+                            registerMessage.message = "Word! " + this.user.user + " registered successfully.";
+                            registerMessage.user = this.user.user;
+                            this.goback();
                         }
-                        else {
-                            this.dialog = {
-                                    title : "Damn! Something went wrong.",
-                                    message:  error.message,
-                                    confirmText: "",
-                                    cancelText: "Try Again"
-                                    };
-                        }
-                        this.$.dialog.open();
+
+                        this.fire("registered", registerMessage);
                     }.bind(this));
                 }
             });
