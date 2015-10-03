@@ -68,7 +68,8 @@
                     axios.post(url, {
                                 user: this.$.username.value,
                                 password: this.$.password.value
-                            }
+                            },
+                            {noauth : true}
                     ).then(function(result){
                         window.localStorage.setItem('user',JSON.stringify(result.data));
                         window.localStorage.setItem('auth', result.headers['x-authorization']);
