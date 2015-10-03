@@ -31,27 +31,25 @@
                 attached: function () {
                     var user = JSON.parse(window.localStorage.getItem('user'));
                     this.greeting = "Hi, " + user.firstName;
-                    window.addEventListener('xhr-started', this.showSpinner.bind(this));
-                    window.addEventListener('xhr-finished', this.hideSpinner.bind(this));
-
+                    window.addEventListener('xhr-requested', this.showSpinner.bind(this));
                 },
 
-                showSpinner: function () {
-                    this.$.spinner.active = true;
-                },
-
-                hideSpinner: function () {
-                    this.$.spinner.active = false;
+                showSpinner: function (e) {
+                    this.$.spinner.active = e.detail.isLoading;
                 },
 
                 detached: function () {
-                    window.removeEventListener('xhr-started');
-                    window.removeEventListener('xhr-finished');
+                    window.removeEventListener('xhr-requested');
                 },
 
                 logout: function () {
-                    window.localStorage.removeItem('user');
-                    window.location = "./login.html";
+
+                    var url = window.global.config.apiroot + "/auth/logout";
+                    axios.get(url).then(function (result) {
+                        window.localStorage.removeItem('user');
+                        window.localStorage.removeItem('auth');
+                        window.location = "./login.html";
+                    });
                 }
 
             });

@@ -2,40 +2,26 @@
 
     function AccountActionProvider(dispatcher) {
         "use strict";
-        var restapi = fermata.json(window.global.config.apiroot);
+
+        var user =  JSON.parse(window.localStorage.getItem('user'));
 
         this.load = function () {
-            return new Promise(function (resolve, reject) {
-                var user = JSON.parse(window.localStorage.getItem('user'));
-                restapi('account')(user.user).get(function (error, account) {
-                    if (error) {
-                        reject(error);
-                        return;
-                    }
+            var url = window.global.config.apiroot + '/account/' + user.user;
+            axios.get(url).then(function(result){
+                var account = result.data;
 
-                    if (!account.domains) {
-                        account.domains = [];
-                    }
-                    dispatcher.dispatch('load', account);
-                    resolve(account);
-                });
+                if (!account.domains) {
+                    account.domains = [];
+                }
+
+                dispatcher.dispatch('load', account);
             });
         };
 
         this.save = function (account) {
-
-            return new Promise(function (resolve, reject) {
-                var user = JSON.parse(window.localStorage.getItem('user'));
-                restapi('account')(user.user).put(account, function (error, result) {
-                    if (error) {
-                        reject(error);
-                    }
-                    else {
-                        resolve();
-                    }
-                });
-            });
-
+            var user = JSON.parse(window.localStorage.getItem('user'));
+            var url = window.global.config.apiroot + '/account/' + user.user;
+            return axios.put(url, account);
         };
 
         this.addDomain = function (domainName) {
