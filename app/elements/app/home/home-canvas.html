@@ -1,4 +1,5 @@
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="home-url-search.html">
 
 
 <dom-module id="home-canvas">
@@ -6,13 +7,11 @@
         :host {
             display: block;
         }
-        #toast {
-            position : absolute;
-        }
     </style>
     <template>
         <h1>Home</h1>
-        <paper-button on-click="click">Click Me</paper-button>
+
+        <home-url-search></home-url-search>
     </template>
 
     <script>

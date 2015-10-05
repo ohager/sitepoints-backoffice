@@ -36,9 +36,13 @@
     };
 
     // Flux Setup
-    var dispatcher = NanoFlux.createDispatcher('accountDispatcher');
-    dispatcher.connectTo(NanoFlux.getStore('accountStore'));
+    var dispatcher = NanoFlux.createDispatcher('dispatcher');
+    var accountStore = NanoFlux.getStore('accountStore');
+    var homeStore = NanoFlux.getStore('homeStore');
+    dispatcher.connectTo(accountStore);
+    dispatcher.connectTo(homeStore);
     NanoFlux.accountActions = new AccountActionProvider(dispatcher);
+    NanoFlux.homeActions = new HomeActionProvider(dispatcher);
 
 
 })(document);
