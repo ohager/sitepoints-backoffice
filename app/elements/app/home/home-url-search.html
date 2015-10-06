@@ -4,6 +4,8 @@
 <link rel="import" href="../../../bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="../../../bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/iron-icons/editor-icons.html">
+
 
 <dom-module id="home-url-search">
     <style>
@@ -58,6 +60,8 @@
                                        icon="clear" alt="clear" title="clear" tabindex="0">
                     </paper-icon-button>
                 </paper-input>
+
+                <paper-icon-button icon="editor:insert-chart" on-click="analyze"></paper-icon-button>
             </div>
 
             <template id="urlList" is="dom-repeat" items="[[urls]]" as="url">
@@ -97,6 +101,15 @@
 
                 searchTimer : null,
 
+                absoluteSearchTerm : function(){
+                    return this.$.domainSelector.selectedItemLabel + "/" + this.searchTerm;
+                },
+
+                analyze : function(){
+                    var url = "/analyzer/" +  window.btoa( this.absoluteSearchTerm() );
+                    document.querySelector('app-router').go(url);
+                },
+
                 clearSearch : function(){
                     this.searchTerm = "";
                     this.set('urls', []);
@@ -119,7 +132,7 @@
 
                 search : function(){
 
-                    var domainSearchTerm = this.$.domainSelector.selectedItemLabel + "/" + this.searchTerm;
+                    var domainSearchTerm = this.absoluteSearchTerm();
 
                     try{
                         new RegExp(domainSearchTerm);

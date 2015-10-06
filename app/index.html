@@ -61,6 +61,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </head>
 
 <body unresolved class="fullbleed layout vertical">
+
+
 <span id="browser-sync-binding"></span>
 <template is="dom-bind" id="app">
 
@@ -75,12 +77,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- Drawer Content -->
             <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
-                <a data-route="home" href="/home">
-                    <iron-icon icon="home"></iron-icon>
+                <a data-route="home" href="#/home">
+                    <iron-icon icon="home" ></iron-icon>
                     <span>Home</span>
                 </a>
 
-                <a data-route="account" href="/account">
+                <a data-route="account" href="#/account">
                     <iron-icon icon="account-box"></iron-icon>
                     <span>Account</span>
                 </a>
@@ -108,6 +110,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <!-- Main Content -->
             <div class="content">
+
+                <app-router>
+
+                    <!-- matches an exact path -->
+                    <app-route path="/home" import="/pages/home-page.html"></app-route>
+
+                    <!-- matches using a wildcard -->
+                    <app-route path="/account" import="/pages/account-page.html"></app-route>
+
+                    <!-- matches using a path variable -->
+                    <app-route path="/analyzer/:pattern" import="/pages/analyzer-page.html"></app-route>
+
+                    <app-route path="*" redirect="/home"></app-route>
+
+                </app-router>
+                <!--
                 <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
                     <section data-route="home">
@@ -122,7 +140,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         </canvas-frame>
                     </section>
 
+                    <section data-route="analyzer">
+                        <canvas-frame>
+                            <analyzer-canvas></analyzer-canvas>
+                        </canvas-frame>
+                    </section>
+
                 </iron-pages>
+                -->
             </div>
 
         </paper-header-panel>

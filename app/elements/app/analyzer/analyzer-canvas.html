@@ -1,0 +1,50 @@
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
+
+
+<dom-module id="analyzer-canvas">
+    <style>
+        :host {
+            display: block;
+        }
+    </style>
+    <template>
+        <h1>Analyzer for <span>[[pattern]]</span></h1>
+    </template>
+
+    <script>
+        (function () {
+
+            "use strict";
+            Polymer({
+                is: 'analyzer-canvas',
+
+                properties: {
+                    pattern : String
+                },
+
+                onActivated : function(){
+                    console.log("Activated");
+                },
+
+                attached : function(){
+                    window.addEventListener("iron-select", this.onActivated);
+                },
+
+                detached : function(){
+                    window.removeEventListener("iron-select", this.onActivated);
+                },
+
+                ready : function(){
+                  this.pattern =  window.atob( window.location.hash.substring( window.location.hash.lastIndexOf('/') + 1 ) );
+                },
+                click : function(e){
+                    this.fire('show-message', "This is the message");
+                }
+
+            });
+        })();
+    </script>
+
+</dom-module>
+
