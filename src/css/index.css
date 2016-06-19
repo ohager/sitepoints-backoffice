@@ -1,2 +1,7 @@
 @import 'surface_styles.css';
 
+#riot-app {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

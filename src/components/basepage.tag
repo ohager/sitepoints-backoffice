@@ -2,9 +2,8 @@ import './menu.tag'
 
 <basepage>
     <menu></menu>
-    <div class="container g--12">
-        <div class="g--12 g-s--12 tile">
-            <yield></yield>
-        </div>
-    </div>
+    <main class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
+       <yield></yield>
+    </main>
 </basepage>
+
