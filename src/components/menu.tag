@@ -20,9 +20,7 @@
     </aside>
 
     <script>
-
-        console.log("Test");
-
+        
         this.currentView = riot.routeState.view;
         this.menuOpen = true;
 
