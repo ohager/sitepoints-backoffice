@@ -1,7 +1,25 @@
-@import 'surface_styles.css';
-
 #riot-app {
     width: 100%;
     margin: 0;
     padding: 0;
 }
+
+/**
+ * Body CSS
+ */
+html,
+body {
+    height: 100%;
+    background-color: #eee;
+}
+
+html,
+body,
+input,
+textarea,
+button {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+

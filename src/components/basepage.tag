@@ -1,9 +1,20 @@
 import './menu.tag'
+import './sidedrawer.tag'
+import './custom-header.tag'
+import './custom-footer.tag'
+import './custom-content.tag'
 
 <basepage>
-    <menu></menu>
-    <main class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
-       <yield></yield>
-    </main>
+    <sidedrawer/>
+    <div class="drawable">
+        <custom-header/>
+
+        <custom-content>
+            <yield/>
+        </custom-content>
+        <custom-footer/>
+    </div>
+
+
 </basepage>
 
