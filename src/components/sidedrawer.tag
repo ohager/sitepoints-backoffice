@@ -1,5 +1,5 @@
 <sidedrawer>
-    <div class={mui--no-user-select:true, active:isDrawerActive}>
+    <div class={mui--no-user-select:true, active:isDrawerActive, dark-primary-color:true}>
         <div id="sidedrawer-brand" class="mui--appbar-line-height mui--text-title">Brand.io</div>
         <div class="mui-divider"></div>
         <ul>
@@ -39,7 +39,6 @@
             left: -200px;
             overflow: auto;
             z-index: 2;
-            background-color: #fff;
             transition: transform 0.2s;
         }
 

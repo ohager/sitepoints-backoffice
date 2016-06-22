@@ -2,10 +2,10 @@ import AppActions from '../actions/app-actions.js'
 
 <custom-header>
     <header>
-        <div class="mui-appbar mui--appbar-line-height">
+        <div class="mui-appbar mui--appbar-line-height default-primary-color">
             <div class="mui-container-fluid" onclick={ openMenu }>
-                <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer">☰</a>
-                <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer">☰</a>
+                <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer mui--no-user-select">☰</a>
+                <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer mui--no-user-select">☰</a>
                 <span class="mui--text-title mui--visible-xs-inline-block">Brand.io</span>
             </div>
         </div>
@@ -18,6 +18,9 @@ import AppActions from '../actions/app-actions.js'
             left: 0;
             z-index: 2;
             transition: left 0.2s;
+            -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
         }
 
         .sidedrawer-toggle {

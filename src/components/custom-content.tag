@@ -1,5 +1,5 @@
 <custom-content>
-    <div id="content-container" class={active:isDrawerActive}>
+    <div id="content-container" class={light-primary-color:true,active:isDrawerActive}>
         <div class="mui--appbar-height"/>
         <div class="mui-container-fluid">
             <yield></yield>
@@ -20,7 +20,6 @@
 
         :scope > #content-container.active {
             margin-left: 200px;
-
         }
     </style>
 
