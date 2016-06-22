@@ -1,11 +1,10 @@
 <sidedrawer>
-    <div class={mui--no-user-select:true, active:isDrawerActive, dark-primary-color:true}>
-        <div id="sidedrawer-brand" class="mui--appbar-line-height mui--text-title">Brand.io</div>
-        <div class="mui-divider"></div>
-        <ul>
-            <li>
+    <!--suppress HtmlUnknownAttribute -->
+    <div class="{mui--no-user-select:true, drawerOpen:isDrawerOpen, dark-primary-color:true}">
+        <ul class="menu">
+            <li class="mui--collapse" onClick="{openSubmenu}">
                 <strong>Category 1</strong>
-                <ul>
+                <ul class="mui--collapse-content">
                     <li><a href="#">Item 1</a></li>
                     <li><a href="#">Item 2</a></li>
                     <li><a href="#">Item 3</a></li>
@@ -42,16 +41,17 @@
             transition: transform 0.2s;
         }
 
-        #sidedrawer-brand {
-            padding-left: 20px;
+        ul.menu{
+            padding-top: 64px;
         }
 
         ul {
             list-style: none;
+            padding: 0;
         }
 
         :scope > ul {
-            padding-left: 0;
+            padding: 0;
         }
 
         :scope > ul > li:first-child {
@@ -70,19 +70,24 @@
 
         strong + ul > li {
             padding: 6px 0px;
+            text-align: center;
         }
 
-        .active {
+        .drawerOpen {
             transform: translate(200px);
         }
+
+        .subMenuOpen{
+        }
+
     </style>
 
     <script>
 
-        this.isDrawerActive = false;
+        this.isDrawerOpen = false;
 
         this.onStoreUpdated = (state) => {
-            this.isDrawerActive = state.drawerIsOpen;
+            this.isDrawerOpen = state.drawerIsOpen;
             this.update();
         };
 

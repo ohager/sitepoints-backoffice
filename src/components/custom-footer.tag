@@ -1,16 +1,23 @@
 <custom-footer>
-    <footer>
+    <footer class="default-primary-color top-shadow">
         <div class="mui-container-fluid">
-            <br>
-            Made with ♥ by <a href="https://www.muicss.com">MUI</a>
+            Copyleft, 2016 - <a href="https://devbutze.com">DevButze</a>
         </div>
     </footer>
 
     <style scoped>
         footer {
-            height: 160px;
-            margin-left: 0px;
-            transition: margin-left 0.2s;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            padding: 8px;
+            height: 32px;
+            margin-left: 0;
+            z-index: 2;
         }
     </style>
+
+    <script>
+        this.isDrawerOpen = false
+    </script>
 </custom-footer>

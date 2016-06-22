@@ -1,6 +1,6 @@
 <custom-content>
-    <div id="content-container" class={light-primary-color:true,active:isDrawerActive}>
-        <div class="mui--appbar-height"/>
+    <div id="content-container" class={light-primary-color:true,active:isDrawerOpen}>
+        <div class="mui--appbar-height"></div>
         <div class="mui-container-fluid">
             <yield></yield>
         </div>
@@ -25,20 +25,20 @@
 
     <script>
 
-        this.isDrawerActive = false;
+        this.isDrawerOpen = false;
 
         this.onStoreUpdated = (state) => {
-            this.isDrawerActive = state.drawerIsOpen;
+            this.isDrawerOpen = state.drawerIsOpen;
             this.update();
-        };
+        }
 
         this.on('before-mount', () => {
             this.subscription = NanoFlux.getFusionStore().subscribe(this, this.onStoreUpdated);
-        });
+        })
 
         this.on('unmount', () => {
             this.subscription.unsubscribe();
-        });
+        })
     </script>
 
 </custom-content>
