@@ -11,7 +11,7 @@
             min-height: 100%;
             overflow-x: hidden;
             margin-left: 0px;
-            transition: margin-left 0.2s;
+            transition: margin-left 0.3s ease-in-out;
 
             /* sticky bottom */
             margin-bottom: -160px;

@@ -1,10 +1,13 @@
+import './menuitem.tag'
+
 <sidedrawer>
     <!--suppress HtmlUnknownAttribute -->
     <div class="{mui--no-user-select:true, drawerOpen:isDrawerOpen, dark-primary-color:true}">
         <ul class="menu">
-            <li class="mui--collapse" onClick="{openSubmenu}">
+            <menuitem title="Test" items="{testItems}"></menuitem>
+            <li onClick="{toggleSubmenu}">
                 <strong>Category 1</strong>
-                <ul class="mui--collapse-content">
+                <ul class="{submenu:true,open:isSubmenuOpen}">
                     <li><a href="#">Item 1</a></li>
                     <li><a href="#">Item 2</a></li>
                     <li><a href="#">Item 3</a></li>
@@ -12,7 +15,7 @@
             </li>
             <li>
                 <strong>Category 2</strong>
-                <ul>
+                <ul class="submenu">
                     <li><a href="#">Item 1</a></li>
                     <li><a href="#">Item 2</a></li>
                     <li><a href="#">Item 3</a></li>
@@ -20,7 +23,7 @@
             </li>
             <li>
                 <strong>Category 3</strong>
-                <ul>
+                <ul class="submenu">
                     <li><a href="#">Item 1</a></li>
                     <li><a href="#">Item 2</a></li>
                     <li><a href="#">Item 3</a></li>
@@ -30,6 +33,7 @@
     </div>
 
     <style scoped>
+
         div.mui--no-user-select {
             position: fixed;
             top: 0;
@@ -38,7 +42,7 @@
             left: -200px;
             overflow: auto;
             z-index: 2;
-            transition: transform 0.2s;
+            transition: transform 0.3s ease-in-out;
         }
 
         ul.menu{
@@ -77,12 +81,14 @@
             transform: translate(200px);
         }
 
-        .subMenuOpen{
-        }
-
     </style>
 
     <script>
+
+        this.testItems = [
+            {href:'#', text:"MenuItem 1"},
+            {href:'#', text:"MenuItem 2"}
+        ]
 
         this.isDrawerOpen = false;
 
@@ -90,6 +96,7 @@
             this.isDrawerOpen = state.drawerIsOpen;
             this.update();
         };
+
 
         this.on('before-mount', () => {
             this.subscription = NanoFlux.getFusionStore().subscribe(this, this.onStoreUpdated);

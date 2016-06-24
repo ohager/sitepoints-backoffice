@@ -1,0 +1,47 @@
+.accordion,
+.accordion ul,
+.accordion li,
+.accordion a,
+.accordion span {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.accordion li {
+    list-style: none;
+}
+
+
+.accordion li > .sub-menu {
+    height: 0;
+    overflow: hidden;
+
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.accordion li:target > .sub-menu {
+    height: 98px;
+}
+
+/* later
+
+.accordion > li > a:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 24px;
+    height: 24px;
+    margin: 4px 8px;
+
+    background-repeat: no-repeat;
+    background-image: url(../img/icons.png);
+    background-position: 0px 0px;
+}
+*/
