@@ -5,6 +5,7 @@ import './menuitem.tag'
     <div class="{mui--no-user-select:true, drawerOpen:isDrawerOpen, dark-primary-color:true}">
         <ul class="menu">
             <menuitem title="Test" items="{testItems}"></menuitem>
+            <menuitem title="Test 2" items="{testItems2}"></menuitem>
             <li onClick="{toggleSubmenu}">
                 <strong>Category 1</strong>
                 <ul class="{submenu:true,open:isSubmenuOpen}">
@@ -86,6 +87,21 @@ import './menuitem.tag'
     <script>
 
         this.testItems = [
+            {href:'#', text:"MenuItem 1"},
+            {href:'#', text:"MenuItem 2"}
+
+        ]
+        this.testItems2 = [
+            {href:'#', text:"MenuItem 1"},
+            {href:'#', text:"MenuItem 2"},
+            {href:'#', text:"MenuItem 1"},
+            {href:'#', text:"MenuItem 2"},
+            {href:'#', text:"MenuItem 1"},
+            {href:'#', text:"MenuItem 2"},
+            {href:'#', text:"MenuItem 1"},
+            {href:'#', text:"MenuItem 2"},
+            {href:'#', text:"MenuItem 1"},
+            {href:'#', text:"MenuItem 2"},
             {href:'#', text:"MenuItem 1"},
             {href:'#', text:"MenuItem 2"}
         ]

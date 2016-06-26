@@ -1,4 +1,5 @@
 import './pages/home.tag'
+import './pages/login.tag'
 
 /*
 import './pages/projects.tag'
@@ -15,11 +16,12 @@ class Router{
 
   constructor(){
     this._currentView = null;
-    this._views = ['home']; //, 'projects', 'demo', 'shop'];
+    this._views = ['login','home']; //, 'projects', 'demo', 'shop'];
     this._defaultView = 'home';
     
     riot.route(this._handleRoute.bind(this));
     riot.route.exec(this._handleRoute.bind(this));
+	  riot.route.start();
   }
 
   _handleRoute(view){

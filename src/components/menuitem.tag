@@ -14,16 +14,16 @@
             opacity: 0;
             overflow: hidden;
 
-            -webkit-transition: all .2s ease-in-out;
-            -moz-transition: all .2s ease-in-out;
-            -o-transition: all .2s ease-in-out;
-            -ms-transition: all .2s ease-in-out;
-            transition: all .2s ease-in-out;
+            -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            -o-transition: all .3s ease-in-out;
+            -ms-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
         }
 
         ul.submenu.open {
             opacity : 1;
-            max-height: 200px;
+            max-height: 400px;
         }
 
     </style>
