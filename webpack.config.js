@@ -9,7 +9,7 @@ var cssnested = require('postcss-nested');
 
 module.exports = {
 	entry: {
-		app: ['./src/app.js']
+		app: ['whatwg-fetch', './src/app.js']
 	},
 	output: {
 		path: __dirname + '/build/',

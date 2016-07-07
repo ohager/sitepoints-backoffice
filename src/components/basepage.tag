@@ -19,9 +19,10 @@ import './custom-content.tag'
         this.on('before-mount', () => {
             var appState = NanoFlux.getFusionStore().getState();
             console.log(JSON.stringify(appState, null, '  '));
+            /*
             if(!appState.isLoggedIn){
                 riot.route('login');
-            }
+            }*/
         })
     </script>
 

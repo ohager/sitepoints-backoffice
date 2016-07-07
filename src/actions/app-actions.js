@@ -1,24 +1,21 @@
-import NanoFlux from '../../node_modules/nanoflux-fusion';
+import NanoFlux from '../../node_modules/nanoflux-fusion/dist/nanoflux-fusion';
 window.NanoFlux = window.NanoFlux || NanoFlux;
 
-const TOGGLE_DRAWER = 1;
-const LOGIN = 2;
 
+NanoFlux.createFusionator({
 
-function appFusionator(previousState, action) {
-
-	switch (action.id) {
-		case TOGGLE_DRAWER:
-			var isOpen = previousState.drawerIsOpen;
-			return {drawerIsOpen: !isOpen};
-		case LOGIN:
+	toggleDrawer : function(previousState, args)
+	{
+		var isOpen = previousState.drawerIsOpen;
+		return {drawerIsOpen: !isOpen};
+	},
+	login: function(previousState, args){
 			console.log("Logging in...");
 			return {isLoggedIn: true};
-
 	}
-}
+})
 
 export default {
-	toggleDrawer: NanoFlux.createFusionActor(appFusionator, TOGGLE_DRAWER),
-	login: NanoFlux.createFusionActor(appFusionator, LOGIN)
+	toggleDrawer: NanoFlux.getFusionActor("toggleDrawer"),
+	login: NanoFlux.getFusionActor("login")
 };

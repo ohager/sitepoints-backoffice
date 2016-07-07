@@ -19,5 +19,7 @@
 
     <script>
         this.isDrawerOpen = false
+
+
     </script>
 </custom-footer>
