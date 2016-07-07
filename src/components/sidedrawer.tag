@@ -4,32 +4,9 @@ import './menuitem.tag'
     <!--suppress HtmlUnknownAttribute -->
     <div class="{mui--no-user-select:true, drawerOpen:isDrawerOpen, dark-primary-color:true}">
         <ul class="menu">
-            <menuitem title="Test" items="{testItems}"></menuitem>
-            <menuitem title="Test 2" items="{testItems2}"></menuitem>
-            <li onClick="{toggleSubmenu}">
-                <strong>Category 1</strong>
-                <ul class="{submenu:true,open:isSubmenuOpen}">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
-                </ul>
-            </li>
-            <li>
-                <strong>Category 2</strong>
-                <ul class="submenu">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
-                </ul>
-            </li>
-            <li>
-                <strong>Category 3</strong>
-                <ul class="submenu">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
-                </ul>
-            </li>
+            <menuitem title="Dashboard"></menuitem>
+            <menuitem title="Account" items="{menu.accountsMenu}"></menuitem>
+            <menuitem title="Sites" items="{menu.sitesMenu}"></menuitem>
         </ul>
     </div>
 
@@ -86,25 +63,18 @@ import './menuitem.tag'
 
     <script>
 
-        this.testItems = [
-            {href:'#', text:"MenuItem 1"},
-            {href:'#', text:"MenuItem 2"}
 
-        ]
-        this.testItems2 = [
-            {href:'#', text:"MenuItem 1"},
-            {href:'#', text:"MenuItem 2"},
-            {href:'#', text:"MenuItem 1"},
-            {href:'#', text:"MenuItem 2"},
-            {href:'#', text:"MenuItem 1"},
-            {href:'#', text:"MenuItem 2"},
-            {href:'#', text:"MenuItem 1"},
-            {href:'#', text:"MenuItem 2"},
-            {href:'#', text:"MenuItem 1"},
-            {href:'#', text:"MenuItem 2"},
-            {href:'#', text:"MenuItem 1"},
-            {href:'#', text:"MenuItem 2"}
-        ]
+        this.menu = {
+            accountsMenu :[
+                {href:'#', text:"Profile"},
+                {href:'#', text:"Security"}
+            ],
+            sitesMenu : [
+                {href:'#', text:"Overview"},
+                {href:'#', text:"New Site"},
+            ]
+        };
+
 
         this.isDrawerOpen = false;
 

@@ -1,4 +1,4 @@
-import NanoFlux from '../../node_modules/nanoflux-fusion/dist/nanoflux-fusion';
+import NanoFlux from '../../node_modules/nanoflux-fusion';
 window.NanoFlux = window.NanoFlux || NanoFlux;
 
 

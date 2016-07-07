@@ -23,7 +23,7 @@
 
         ul.submenu.open {
             opacity : 1;
-            max-height: 400px;
+            max-height: 200px;
         }
 
     </style>
