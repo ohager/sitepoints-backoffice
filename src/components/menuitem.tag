@@ -1,6 +1,8 @@
 <menuitem>
     <li onClick="{toggleSubmenu}">
-        <strong>{opts.title}</strong>
+        <strong>{opts.title}
+            <i class="{icon-angle-up:true,open:isSubmenuOpen}"></i>
+        </strong>
         <ul class="{submenu:true,open:isSubmenuOpen}">
             <li each="{opts.items}">
                 <a href="{href}">{text}</a>
@@ -21,10 +23,21 @@
             transition: all .3s ease-in-out;
         }
 
+        strong > i {
+            position: absolute;
+            right: 1em;
+            transition: transform .5s ease-in-out
+        }
+
         ul.submenu.open {
             opacity : 1;
             max-height: 200px;
         }
+
+        strong > i.open {
+            transform: rotate(0.5turn);
+        }
+
 
     </style>
 
